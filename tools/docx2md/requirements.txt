@@ -1,0 +1,4 @@
+python-docx>=1.2
+lxml>=5
+cmarkgfm>=2024.11
+pytest>=8

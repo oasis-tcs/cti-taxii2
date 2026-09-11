@@ -1,0 +1,33 @@
+{
+  "_comment": "Accepted deviations between the DOCX link model and the Markdown, decided by Andras Iklody on 2026-09-11 (PRD ~/prds/taxii-spec.prd.md, Q1/Q3/Q6). 'text' is the link text in the DOCX ('*' = any); 'docx' the target identity found in the DOCX; 'md' the identity the Markdown must use (null = the link is dropped); optional 'md_text' if the link span is normalised.",
+  "resolutions": [
+    {"text": "3", "docx": "dangling:_dwru50atx72x", "md": "heading:3",
+     "why": "Q1: bookmark missing in the source; the link text names section 3 (TAXII - Core Concepts)."},
+    {"text": "4", "docx": "dangling:_rctaybmqy5s0", "md": "heading:4",
+     "why": "Q1: bookmark missing in the source; the link text names section 4 (TAXII API - Server Information)."},
+    {"text": "5", "docx": "dangling:_wzwrwiz8wvuc", "md": "heading:5",
+     "why": "Q1: bookmark missing in the source; the link text names section 5 (TAXII API - Collections)."},
+    {"text": "6", "docx": "dangling:_ajzyjryzbne1", "md": "heading:6",
+     "why": "Q1: bookmark missing in the source; the link text names section 6 (TAXII API - Objects)."},
+    {"text": "Appendix B", "docx": "dangling:_h1stnx7npfus", "md": "heading:Appendix B",
+     "why": "Q1: bookmark missing in the source; the link text names Appendix B (IANA Considerations)."},
+    {"text": "STIX Version 2.1", "docx": "dangling:lq5lkamlx4vg", "md": "url:https://github.com/oasis-tcs/cti-stix2/blob/main/spec/stix-v2.1.md",
+     "why": "Q1: the STIX 2.1 reference was lost when STIX moved from DOCX to Markdown; link to the STIX 2.1 Markdown specification on GitHub."},
+    {"text": "STIX", "docx": "dangling:lq5lkamlx4vg", "md": "url:https://github.com/oasis-tcs/cti-stix2/blob/main/spec/stix-v2.1.md",
+     "why": "Q1: same as above where Word split the link text."},
+    {"text": "", "docx": "dangling:lq5lkamlx4vg", "md": null,
+     "why": "Q6: zero-length hyperlink in the source (1.6.10 and 8.2.1); nothing to link."},
+    {"text": "RFC8259", "docx": "ref:RFC8174", "md": "ref:RFC8259",
+     "why": "Q3: the source bookmark sits on the [RFC8174] entry; the citation means [RFC8259]. Errata candidate."},
+    {"text": "RFC8446", "docx": "ref:RFC8259", "md": "ref:RFC8446",
+     "why": "Q3: the source bookmark sits on the [RFC8259] entry; the citation means [RFC8446]. Errata candidate."},
+    {"text": "RFC5280]", "docx": "ref:RFC5280", "md": "ref:RFC5280", "md_text": "RFC5280",
+     "why": "Q6: the closing bracket is inside the link span in the source; the Markdown keeps the bracket outside as for every other citation."},
+    {"text": "RFC6818]", "docx": "ref:RFC6818", "md": "ref:RFC6818", "md_text": "RFC6818",
+     "why": "Q6: as above."},
+    {"text": "RFC6125]", "docx": "ref:RFC6125", "md": "ref:RFC6125", "md_text": "RFC6125",
+     "why": "Q6: as above."},
+    {"text": "RFC7540]", "docx": "ref:RFC7540", "md": "ref:RFC7540", "md_text": "RFC7540",
+     "why": "Q6: as above."}
+  ]
+}
