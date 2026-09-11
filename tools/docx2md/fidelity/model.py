@@ -373,9 +373,9 @@ def mono_lines(doc: Document, sections=None) -> Counter:
         if not in_sections(b.section, sections):
             continue
         if isinstance(b, Code):
-            lines = b.lines
+            lines = b.lines  # indentation is content in a code block
         elif isinstance(b, Para) and b.mono:
-            lines = b.text.split("\n")
+            lines = [l.strip() for l in b.text.split("\n")]  # leading space is not rendered in a paragraph
         else:
             continue
         for l in lines:

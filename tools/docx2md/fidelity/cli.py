@@ -113,7 +113,7 @@ def cmd_dump(args) -> int:
     profile = _profile(args)
     if args.md:
         from .md_model import read_md
-        doc = read_md(args.md, profile)
+        doc = read_md(args.md, profile, is_html=args.md.lower().endswith((".html", ".htm")))
     else:
         doc = _docx(args, profile)
     if args.json:
@@ -132,7 +132,8 @@ def cmd_verify(args) -> int:
     profile = _profile(args)
     from .md_model import read_md
     dx = _docx(args, profile)
-    md = read_md(args.md, profile)
+    is_html = args.html or args.md.lower().endswith((".html", ".htm"))
+    md = read_md(args.md, profile, is_html=is_html)
     res_path = args.resolutions or profile.resolutions_path()
     resolutions = load_resolutions(res_path) if res_path and Path(res_path).exists() else []
     rep = compare(dx, md, sections=args.section, resolutions=resolutions, partial=args.partial)
@@ -164,8 +165,9 @@ def main(argv=None) -> int:
     p.add_argument("--json", action="store_true")
     p.set_defaults(fn=cmd_dump)
 
-    p = sub.add_parser("verify", help="compare a Markdown file with the DOCX")
-    p.add_argument("md")
+    p = sub.add_parser("verify", help="compare a Markdown file (or published HTML) with the DOCX")
+    p.add_argument("md", help="Markdown file, or an .html file (published rendering)")
+    p.add_argument("--html", action="store_true", help="treat the input as HTML instead of Markdown")
     p.add_argument("--docx")
     p.add_argument("--section", action="append")
     p.add_argument("--partial", action="store_true", help="tolerate links to sections not yet converted")

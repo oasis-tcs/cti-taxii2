@@ -1,0 +1,19 @@
+{
+  "title": "TAXII Version 2.1",
+  "lang": "en",
+  "markdown": "spec/taxii-v2.1.md",
+  "html": "spec/taxii-v2.1.html",
+  "pdf": "spec/taxii-v2.1.pdf",
+  "fidelity_profile": "tools/docx2md/profiles/taxii-v2.1.json",
+  "pdf_engine": "weasyprint",
+  "highlight": false,
+  "page": {
+    "size": "Letter",
+    "margin": "22mm 20mm 22mm 20mm",
+    "header_left": "taxii-v2.1-os",
+    "header_right": "10 June 2021",
+    "footer_left": "Standards Track Work Product",
+    "footer_center": "Copyright © OASIS Open 2022. All Rights Reserved.",
+    "footer_right": "Page {page} of {pages}"
+  }
+}

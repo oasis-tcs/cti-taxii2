@@ -45,6 +45,7 @@ All commands take `--profile profiles/<name>.json` (default: `profiles/taxii-v2.
 | `python -m fidelity audit [--out reports/x.md]` | Extract the DOCX model and report source anomalies: dangling anchors, mis-targeted reference links, duplicate reference keys, duplicate headings, TOC mismatches, odd link spans. |
 | `python -m fidelity dump --docx` / `--md FILE` `[--section N ...]` | Print the canonical model of either side, for eyeballing what the comparison compares. |
 | `python -m fidelity verify spec.md [--section N ...] [--partial] [--json]` | Compare the Markdown with the DOCX, layer by layer. Exit code 1 on any difference not covered by the resolutions file. |
+| `python -m fidelity verify spec.html --html` | Same comparison for a published HTML rendering (for example pandoc's output from `tools/publish`), so the publishing step is verified too. |
 | `python -m convert [--out FILE] [--no-images] [--preview FILE.html]` | Render the DOCX model as STIX-style Markdown (to the profile's `output`), extract the images next to it, apply the resolutions file to links. Deterministic: same input, same output. `--preview` also writes a local HTML rendering (GitHub's engine plus the `taxii*` stylesheet) for the reading pass. |
 
 The normal loop is `convert`, then `verify`, then fix the converter or add a resolution, never

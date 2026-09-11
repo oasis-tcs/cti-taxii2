@@ -21,7 +21,8 @@ from .model import (
 from .profile import Profile
 
 HEADING_TAGS = {"h1", "h2", "h3", "h4", "h5", "h6"}
-CONTAINER_TAGS = {"div", "blockquote", "section", "details", "figure", "summary", "center"}
+CONTAINER_TAGS = {"div", "blockquote", "section", "details", "figure", "summary", "center", "article", "main"}
+IGNORE_TAGS = {"nav", "header", "footer", "script", "style", "noscript", "template"}  # page furniture in published HTML
 
 
 def render_html(md_text: str) -> str:
@@ -52,7 +53,9 @@ class MdReader:
     # ------------------------------------------------------------------ inline
     @staticmethod
     def _mk(text: str, a: dict) -> Inline:
-        return Inline(text, a.get("bold", False), a.get("italic", False), a.get("mono", False), a.get("cls"), a.get("link"))
+        # A newline inside an HTML text node is whitespace (source wrapping, soft breaks);
+        # only <br> is a line break and is created directly as Inline("\n").
+        return Inline(text.replace("\n", " "), a.get("bold", False), a.get("italic", False), a.get("mono", False), a.get("cls"), a.get("link"))
 
     def _inline_content(self, el, a: dict) -> list:
         out = []
@@ -88,7 +91,7 @@ class MdReader:
             if href:
                 a["link"] = ("anchor:" + href[1:]) if href.startswith("#") else "url:" + href
         elif tag == "br":
-            return [self._mk("\n", a)]
+            return [Inline("\n", a.get("bold", False), a.get("italic", False), a.get("mono", False), a.get("cls"), a.get("link"))]
         elif tag == "img":
             return []
         return self._inline_content(ch, a)
@@ -131,12 +134,15 @@ class MdReader:
             cur.clear()
 
         if el.text and el.text.strip():
-            cur.append(Inline(el.text))
+            cur.append(self._mk(el.text, {}))
         for ch in el:
             tag = ch.tag if isinstance(ch.tag, str) else None
             if tag is None:
                 if ch.tail:
-                    cur.append(Inline(ch.tail))
+                    cur.append(self._mk(ch.tail, {}))
+                continue
+            if tag in IGNORE_TAGS:
+                flush()
                 continue
             if toplevel and self.in_toc and tag not in HEADING_TAGS:
                 if tag in ("ul", "ol"):
@@ -179,7 +185,7 @@ class MdReader:
             else:
                 cur += self._inline_el(ch, {})
             if ch.tail and (tag not in HEADING_TAGS):
-                cur.append(Inline(ch.tail))
+                cur.append(self._mk(ch.tail, {}))
         flush()
 
     def _heading(self, h, out: list) -> None:
@@ -229,7 +235,7 @@ class MdReader:
                 cur.clear()
 
             if li.text:
-                cur.append(Inline(li.text))
+                cur.append(self._mk(li.text, {}))
             for ch in li:
                 tag = ch.tag if isinstance(ch.tag, str) else None
                 if tag in ("ul", "ol"):
@@ -253,7 +259,7 @@ class MdReader:
                 else:
                     cur.extend(self._inline_el(ch, {}))
                 if ch.tail:
-                    cur.append(Inline(ch.tail))
+                    cur.append(self._mk(ch.tail, {}))
             flush()
 
     def _table(self, t) -> Table:
@@ -275,8 +281,13 @@ class MdReader:
         return Table(rows=rows)
 
     # ------------------------------------------------------------------ document
-    def read(self) -> Document:
-        root = lhtml.fragment_fromstring(render_html(self.text), create_parent="div")
+    def read(self, is_html: bool = False) -> Document:
+        if is_html:
+            # published HTML (for example pandoc's standalone output): walk the <body>
+            page = lhtml.document_fromstring(self.text)
+            root = page.body if page.body is not None else page
+        else:
+            root = lhtml.fragment_fromstring(render_html(self.text), create_parent="div")
         blocks: list = []
         self._children(root, blocks, toplevel=True)
         # Code blocks come from <pre> only; a paragraph made of inline code stays a paragraph
@@ -336,6 +347,6 @@ class MdReader:
                 self.findings.append({"kind": "heading-without-anchor", "number": h.number, "title": h.title})
 
 
-def read_md(path_or_text, profile: Profile, is_text=False) -> Document:
+def read_md(path_or_text, profile: Profile, is_text=False, is_html=False) -> Document:
     text = path_or_text if is_text else open(path_or_text, encoding="utf8").read()
-    return MdReader(text, profile).read()
+    return MdReader(text, profile).read(is_html=is_html)
