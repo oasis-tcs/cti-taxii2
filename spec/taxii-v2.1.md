@@ -1773,7 +1773,7 @@ This Endpoint retrieves a manifest about the objects in a Collection. It support
 
 If a client fails authentication then this endpoint **MUST** return either an HTTP 401 (Unauthorized) or an HTTP 404 (Not Found).
 
-If the Collection specifies **can\_read** as <span class="taxiiliteral">false</span> for a particular client, this Endpoint **MUST** return an HTTP HTTP 403 (Forbidden) or HTTP 404 (Not Found) error.
+If the Collection specifies **can\_read** as <span class="taxiiliteral">false</span> for a particular client, this Endpoint **MUST** return an HTTP 403 (Forbidden) or HTTP 404 (Not Found) error.
 
 Filtering is applied against the source object rather than the manifest entry for an object. Thus, searching the manifest for a **type** of <span class="taxiiliteral">indicator</span> will return the manifest entries for objects with a type of <span class="taxiiliteral">indicator</span>, even though the manifest doesn't have a **type** property.
 
@@ -1964,7 +1964,7 @@ This Endpoint retrieves objects from a Collection. Clients can search for object
 
 If a client fails authentication then this endpoint **MUST** return either an HTTP 401 (Unauthorized) or an HTTP 404 (Not Found)
 
-If the Collection specifies **can\_read** as <span class="taxiiliteral">false</span> for a particular client, this Endpoint **MUST** return an HTTP HTTP 403 (Forbidden) or HTTP 404 (Not Found) error.
+If the Collection specifies **can\_read** as <span class="taxiiliteral">false</span> for a particular client, this Endpoint **MUST** return an HTTP 403 (Forbidden) or HTTP 404 (Not Found) error.
 
 To support searching the Collection, this Endpoint supports filtering as defined in section [3.4](#filtering). Clients can provide one or more filter parameters to get objects with a specific ID, of a specific type, or with a specific version. Future versions of TAXII will add more advanced filtering capabilities.
 
@@ -2089,7 +2089,7 @@ This Endpoint adds objects to a Collection.
 
 If a client fails authentication then this endpoint **MUST** return either an HTTP 401 (Unauthorized) or an HTTP 404 (Not Found).
 
-If the Collection specifies **can\_write** as <span class="taxiiliteral">false</span> for a particular client, this Endpoint **MUST** return an HTTP HTTP 403 (Forbidden) or HTTP 404 (Not Found) error.
+If the Collection specifies **can\_write** as <span class="taxiiliteral">false</span> for a particular client, this Endpoint **MUST** return an HTTP 403 (Forbidden) or HTTP 404 (Not Found) error.
 
 Successful responses to this Endpoint will contain a status resource describing the status of the request. The status resource contains an id, which can be used to make requests to the get status Endpoint (see section [4.3](#get-status)), a status flag to indicate whether the request is completed or still being processed, and information about the status of the particular objects in the request. If a client publishes an exact duplicate of an Object already present in the Collection, the server **MUST** not return an error for that Object.
 
@@ -2219,7 +2219,7 @@ This Endpoint gets an object from a Collection by its **id**. It can be thought 
 
 If a client fails authentication then this endpoint **MUST** return either an HTTP 401 (Unauthorized) or an HTTP 404 (Not Found).
 
-If the Collection specifies **can\_read** as <span class="taxiiliteral">false</span> for a particular client, this Endpoint **MUST** return an HTTP HTTP 403 (Forbidden) or HTTP 404 (Not Found) error.
+If the Collection specifies **can\_read** as <span class="taxiiliteral">false</span> for a particular client, this Endpoint **MUST** return an HTTP 403 (Forbidden) or HTTP 404 (Not Found) error.
 
 To support getting a particular version of an object, this Endpoint supports filtering as defined in section [3.4](#filtering). The only valid match parameter is <span class="taxiiliteral">version</span>.
 
@@ -2479,7 +2479,7 @@ This Endpoint retrieves a list of one or more versions of an object in a Collect
 
 If a client fails authentication then this endpoint **MUST** return either an HTTP 401 (Unauthorized) or an HTTP 404 (Not Found).
 
-If the Collection specifies **can\_read** as <span class="taxiiliteral">false</span> for a particular client, this Endpoint **MUST** return an HTTP HTTP 403 (Forbidden) or HTTP 404 (Not Found) error.
+If the Collection specifies **can\_read** as <span class="taxiiliteral">false</span> for a particular client, this Endpoint **MUST** return an HTTP 403 (Forbidden) or HTTP 404 (Not Found) error.
 
 `GET /{api-root}/collections/{id}/objects/{object-id}/` \
 ` versions/`
