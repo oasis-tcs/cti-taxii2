@@ -1,0 +1,42 @@
+{
+  "name": "taxii-v2.1",
+  "title": "TAXII Version 2.1 (OASIS Standard, 10 June 2021)",
+  "source": "source/taxii-v2.1-os.docx",
+  "sha256": "380022d365896f5aff2bd8e18c1c7d66da4159be22d2fab6d117d6d4cccbed7a",
+  "output": "../../spec/taxii-v2.1.md",
+  "resolutions": "resolutions/taxii-v2.1.json",
+
+  "heading_styles": {"Heading1": 1, "Heading2": 2, "Heading3": 3, "Heading4": 4},
+  "appendix_heading_styles": {"AppendixHeading1": 1},
+  "appendix_number_format": "Appendix {letter}",
+
+  "skip_style_prefixes": ["toc"],
+  "skip_paragraph_texts": ["Table of Contents"],
+
+  "mono_fonts": ["Consolas"],
+  "shading_classes": {"F9F2F4": "type", "CFE2F3": "literal", "EFEFEF": "alt"},
+  "label_colours": ["4D78B8", "4BA154", "D5373B", "3B0070"],
+  "bold_drops_mono": true,
+
+  "reference_section_keywords": ["References"],
+  "split_reference_keys": true,
+  "unwrap_tables": {"rows": 2, "last_row_colspan": 2},
+  "drop_empty_tables": true,
+
+  "md_span_classes": {
+    "taxiitype": "type",
+    "taxiiliteral": "literal",
+    "taxiialt": "alt"
+  },
+  "md_class_names": {"type": "taxiitype", "literal": "taxiiliteral", "alt": "taxiialt", "header": "taxiitr"},
+  "toc_heading_text": "Table of Contents",
+
+  "front_matter": {
+    "logo_url": "https://docs.oasis-open.org/templates/OASISLogo-v3.0.png",
+    "title_style": "Title",
+    "subtitle_style": "Subtitle",
+    "label_styles": ["Title page info"],
+    "notices_style": "Notices"
+  },
+  "images": {"image1.png": null, "image2.png": "figure-1-1.png", "image3.png": "figure-1-2-and-1-3.png"}
+}
