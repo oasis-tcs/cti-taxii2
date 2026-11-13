@@ -2311,7 +2311,7 @@ Content-Type: application/taxii+json;version=2.1
 **GET Request**
 
 ```
-GET /api1/collections/91a7b528-80eb-42ed-a74d-c6fbd5a26116/object/
+GET /api1/collections/91a7b528-80eb-42ed-a74d-c6fbd5a26116/objects/
 indicator--252c7c11-daf2-42bd-843b-be65edca9f61/ HTTP/1.1
 Host: example.com
 Accept: application/taxii+json;version=2.1
@@ -2460,7 +2460,7 @@ Content-Type: application/taxii+json;version=2.1
 **DELETE Request**
 
 ```
-DELETE /api1/collections/91a7b528-80eb-42ed-a74d-c6fbd5a26116/object/
+DELETE /api1/collections/91a7b528-80eb-42ed-a74d-c6fbd5a26116/objects/
 indicator--252c7c11-daf2-42bd-843b-be65edca9f61/ HTTP/1.1
 Host: example.com
 Accept: application/taxii+json;version=2.1
