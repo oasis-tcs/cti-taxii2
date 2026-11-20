@@ -1777,8 +1777,6 @@ If the Collection specifies **can\_read** as <span class="taxiiliteral">false</s
 
 Filtering is applied against the source object rather than the manifest entry for an object. Thus, searching the manifest for a **type** of <span class="taxiiliteral">indicator</span> will return the manifest entries for objects with a type of <span class="taxiiliteral">indicator</span>, even though the manifest doesn't have a **type** property.
 
-If a client fails authentication then this endpoint **MUST** return either an HTTP 401 (Unauthorized) or an HTTP 404 (Not Found).
-
 `GET /{api-root}/collections/{id}/manifest/`
 
 **Implementation Notes**
@@ -1815,7 +1813,7 @@ Filtering is based on properties of the objects that the manifest entries repres
 **Required Headers**
 
 ```
-Accept: application/taxii+json;version=2.1,application/stix+json;version=2.1
+Accept: application/taxii+json;version=2.1
 ```
 
 **Successful Responses**
